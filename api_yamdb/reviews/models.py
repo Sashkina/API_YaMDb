@@ -41,7 +41,6 @@ class Title(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         related_name='title',
-        verbose_name=('URL категории')
     )
 
     def __str__(self):
@@ -51,3 +50,13 @@ class Title(models.Model):
         verbose_name = 'Произведение'
         verbose_name_plural = 'Произведения'
         ordering = ['name', 'description']
+
+
+class TitleGenreAssign(models.Model):
+    """Модель для назначения жанров произведениям."""
+    title = models.ForeignKey(Title, on_delete=models.CASCADE, verbose_name=('Произведение'))
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, verbose_name=('Жанр'))
+
+    class Meta:
+        verbose_name = 'Назначение жанра'
+        verbose_name_plural = 'Назначения жанров'
