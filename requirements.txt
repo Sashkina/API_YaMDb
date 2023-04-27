@@ -1,13 +1,13 @@
 asgiref==3.6.0
 atomicwrites==1.4.1
+django-reviews==1.2.1
 attrs==23.1.0
 certifi==2022.12.7
 charset-normalizer==2.0.12
-colorama==0.4.6
 Django==3.2
 django-filter==23.1
-django-reviews==1.2.1
 djangorestframework==3.12.4
+djangorestframework-simplejwt==5.2.2
 idna==3.4
 iniconfig==2.0.0
 packaging==23.1
