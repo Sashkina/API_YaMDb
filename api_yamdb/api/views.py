@@ -2,6 +2,7 @@ import django_filters
 from rest_framework import filters, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import get_object_or_404
+from .permissions import IsAdminOrReadOnly, IsAdminOrAuthorOrReadOnly
 
 from reviews.models import Category, Genre, Title, Review
 from .serializers import (CategorySerializer,GenreSerializer,
@@ -20,6 +21,7 @@ class TitleFilter(django_filters.FilterSet):
 
 class TitleViewSet(viewsets.ModelViewSet):
     """ Эндпоинт для работы с моделью Title. """
+    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend,)
     filterset_class = TitleFilter
 
@@ -44,6 +46,7 @@ class TitleViewSet(viewsets.ModelViewSet):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     """ Эндпоинт для работы с моделью Category. """
+    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     filter_backends = (filters.SearchFilter,)
@@ -53,6 +56,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class GenreViewSet(viewsets.ModelViewSet):
     """ Эндпоинт для работы с моделью Genre. """
+    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = GenreSerializer
     queryset = Genre.objects.all()
     filter_backends = (filters.SearchFilter,)
@@ -61,6 +65,7 @@ class GenreViewSet(viewsets.ModelViewSet):
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAdminOrAuthorOrReadOnly,)
     serializer_class = ReviewSerializer
     permission_classes = []
 
@@ -77,6 +82,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAdminOrAuthorOrReadOnly,)
     serializer_class = CommentSerializer
     permission_classes = []
 

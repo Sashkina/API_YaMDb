@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from .utils import validate_username_me
+from django.core.validators import RegexValidator
 
 
 USER = 'user'
@@ -19,7 +20,12 @@ class User(AbstractUser):
         max_length=150,
         unique=True,
         blank=False,
-        null=False
+        null=False,
+        validators=[
+            RegexValidator(
+                regex=r'^[\w.@+-]+\Z',
+                message='Неверно введено имя'
+            ), validate_username_me]
     )
 
     email = models.EmailField(
