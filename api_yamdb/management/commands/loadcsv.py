@@ -7,6 +7,7 @@ from users.models import User
 # Настройка логгера
 logging.basicConfig(filename='import.log', level=logging.INFO)
 
+
 class Command(BaseCommand):
     help = "Наполняет базу данными из csv"
 

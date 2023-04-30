@@ -3,15 +3,14 @@ from django.core.validators import RegexValidator
 from django.db import models
 from .utils import validate_username_me
 
-
 USER = 'user'
 MODERATOR = 'moderator'
 ADMIN = 'admin'
 ROLE_CHOICES = [
-        (USER, 'Пользователь'),
-        (MODERATOR, 'Модератор'),
-        (ADMIN, 'Администратор'),
-    ]
+    (USER, 'Пользователь'),
+    (MODERATOR, 'Модератор'),
+    (ADMIN, 'Администратор'),
+]
 
 
 class User(AbstractUser):

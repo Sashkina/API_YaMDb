@@ -18,8 +18,8 @@ from .serializers import (ConfirmationSerializer, UserSerializer,
 @permission_classes((permissions.AllowAny,))
 def get_confirmation_code(request):
     if (
-        'username' not in request.data.keys()
-        or 'email' not in request.data.keys()
+            'username' not in request.data.keys()
+            or 'email' not in request.data.keys()
     ):
         return Response(
             {
@@ -28,12 +28,12 @@ def get_confirmation_code(request):
             },
             status=status.HTTP_400_BAD_REQUEST
         )
-        
+
     if not User.objects.filter(
-        username=request.data['username'], email=request.data['email']
+            username=request.data['username'], email=request.data['email']
     ).exists():
         serializer = ConfirmationSerializer(data=request.data)
-        
+
         if not serializer.is_valid():
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST

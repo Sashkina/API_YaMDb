@@ -3,14 +3,12 @@ from .models import User
 
 
 class ConfirmationSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = ('username', 'email')
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'bio', 'email',
@@ -19,7 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserPATCHSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'bio', 'email', ]

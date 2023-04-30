@@ -1,7 +1,7 @@
 from django.db import models
-# from django.core.validators import MaxValueValidator, MinValueValidator
 
 from users.models import User
+
 
 class Category(models.Model):
     """Модель, описывающая категории произведений."""

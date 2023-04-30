@@ -8,7 +8,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from reviews.models import Category, Genre, Title, Review
-from .serializers import (CategorySerializer,GenreSerializer,
+from .serializers import (CategorySerializer, GenreSerializer,
                           TitleReadSerializer, TitleWriteSerializer,
                           ReviewSerializer, CommentSerializer)
 from .permissions import (IsAdminOrReadOnly,

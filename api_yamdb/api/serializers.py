@@ -58,8 +58,8 @@ class TitleWriteSerializer(serializers.ModelSerializer):
                   'category',
                   'genre',
                   'rating')
-        
-        
+
+
 class ReviewSerializer(serializers.ModelSerializer):
     """Сериализатор модели Review."""
     author = serializers.SlugRelatedField(
@@ -67,6 +67,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         read_only=True,
         default=serializers.CurrentUserDefault()
     )
+
     # score = serializers.IntegerField(min_value=1, max_value=10)
 
     class Meta:
