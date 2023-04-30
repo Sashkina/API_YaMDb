@@ -1,5 +1,4 @@
 from django.db import models
-
 from users.models import User
 
 
@@ -35,7 +34,8 @@ class Title(models.Model):
     """Модель, описывающая произведения."""
     name = models.CharField(max_length=100, verbose_name=('Название'))
     year = models.IntegerField(verbose_name=('Год выпуска'))
-    description = models.TextField(null=True, blank=True, verbose_name=('Описание'))
+    description = models.TextField(
+        null=True, blank=True, verbose_name=('Описание'))
     genre = models.ManyToManyField(
         Genre, related_name='title', verbose_name=('URL жанра'))
     category = models.ForeignKey(
@@ -56,8 +56,10 @@ class Title(models.Model):
 
 class TitleGenreAssign(models.Model):
     """Модель для назначения жанров произведениям."""
-    title = models.ForeignKey(Title, on_delete=models.CASCADE, verbose_name=('Произведение'))
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, verbose_name=('Жанр'))
+    title = models.ForeignKey(
+        Title, on_delete=models.CASCADE, verbose_name=('Произведение'))
+    genre = models.ForeignKey(
+        Genre, on_delete=models.CASCADE, verbose_name=('Жанр'))
 
     class Meta:
         verbose_name = 'Назначение жанра'
@@ -69,7 +71,6 @@ class Review(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='reviews')
     text = models.TextField()
-    # score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     score = models.IntegerField()
     title = models.ForeignKey(
         Title, on_delete=models.CASCADE, related_name='reviews')

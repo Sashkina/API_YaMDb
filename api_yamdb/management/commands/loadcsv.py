@@ -1,8 +1,8 @@
 import csv
 import logging
+
 from django.core.management.base import BaseCommand
-from reviews.models import Category, Genre, Title, Review, Comment
-from users.models import User
+from reviews.models import Category, Genre
 
 # Настройка логгера
 logging.basicConfig(filename='import.log', level=logging.INFO)
@@ -42,7 +42,9 @@ class Command(BaseCommand):
                         )
                     )
                     # Запись информации об успехе в лог
-                    logging.info(f'Создана категория {row["slug"]} c id = {category.pk}')
+                    logging.info(f'Создана категория {row["slug"]}'
+                                 f'c id = {category.pk}'
+                                 )
             Category.objects.bulk_create(categories_to_create)
 
         # Загрузка жанров
@@ -72,7 +74,9 @@ class Command(BaseCommand):
                         )
                     )
                     # Запись информации об успехе в лог
-                    logging.info(f'Создан жанр {row["slug"]} c id = {genre.pk}')
+                    logging.info(f'Создан жанр {row["slug"]}'
+                                 f'c id = {genre.pk}'
+                                 )
             Genre.objects.bulk_create(genres_to_create)
 
         # Запись информации о завершении загрузки данных в лог

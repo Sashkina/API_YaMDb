@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 class IsAdminUser(permissions.BasePermission):
     '''
-    Разрешение, что только суперюзер и администратор 
+    Разрешение, что только суперюзер и администратор
     могут просматривать, изменять и удалять контент.
     '''
 
@@ -28,8 +28,8 @@ class IsAdminOrReadOnly(permissions.BasePermission):
                 or request.method == 'DELETE'
                 or request.method == 'PATCH'
                 ) and (
-                request.user.is_authenticated
-                and request.user.is_admin)
+                    request.user.is_authenticated
+                    and request.user.is_admin)
 
 
 class IsAdminOrAuthorOrReadOnly(permissions.BasePermission):
@@ -41,8 +41,8 @@ class IsAdminOrAuthorOrReadOnly(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return (
-                request.method in permissions.SAFE_METHODS
-                or request.user.is_authenticated
+            request.method in permissions.SAFE_METHODS
+            or request.user.is_authenticated
         )
 
     def has_object_permission(self, request, view, obj):
@@ -50,6 +50,6 @@ class IsAdminOrAuthorOrReadOnly(permissions.BasePermission):
             return True
 
         return request.user.is_authenticated and (
-                request.user.is_admin
-                or request.user.is_moderator
-                or request.user == obj.author)
+            request.user.is_admin
+            or request.user.is_moderator
+            or request.user == obj.author)

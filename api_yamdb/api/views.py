@@ -1,23 +1,25 @@
 import django_filters
-from rest_framework import filters, viewsets, status
-from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Avg
 from django.db import IntegrityError
+from django.db.models import Avg
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, status, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
+from reviews.models import Category, Genre, Review, Title
 
-from reviews.models import Category, Genre, Title, Review
-from .serializers import (CategorySerializer, GenreSerializer,
-                          TitleReadSerializer, TitleWriteSerializer,
-                          ReviewSerializer, CommentSerializer)
-from .permissions import (IsAdminOrReadOnly,
-                          IsAdminOrAuthorOrReadOnly)
+from .permissions import IsAdminOrAuthorOrReadOnly, IsAdminOrReadOnly
+from .serializers import (CategorySerializer, CommentSerializer,
+                          GenreSerializer, ReviewSerializer,
+                          TitleReadSerializer, TitleWriteSerializer)
 
 
 class TitleFilter(django_filters.FilterSet):
     """Класс для создания фильтров."""
-    name = django_filters.CharFilter(field_name='name', lookup_expr='icontains')
+    name = django_filters.CharFilter(
+        field_name='name',
+        lookup_expr='icontains'
+    )
 
     class Meta:
         model = Title
