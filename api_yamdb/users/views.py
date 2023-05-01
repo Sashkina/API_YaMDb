@@ -1,4 +1,5 @@
 from api.permissions import IsAdminUser
+from api_yamdb.settings import DEFAULT_FROM_EMAIL
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
@@ -6,8 +7,6 @@ from rest_framework import filters, permissions, status, viewsets
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import AccessToken
-
-from api_yamdb.settings import DEFAULT_FROM_EMAIL
 
 from .models import User
 from .serializers import (ConfirmationCodeSerializer, ConfirmationSerializer,
@@ -74,12 +73,12 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ['username', ]
+    search_fields = ('username',)
     lookup_field = 'username'
-    http_method_names = ['get', 'post', 'delete', 'patch']
+    http_method_names = ('get', 'post', 'delete', 'patch')
 
     @action(methods=['GET', 'PATCH'], detail=False,
-            permission_classes=[permissions.IsAuthenticated])
+            permission_classes=(permissions.IsAuthenticated,))
     def me(self, request):
         if request.method == 'GET':
             serializer = UserSerializer(self.request.user)

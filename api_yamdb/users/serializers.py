@@ -12,15 +12,15 @@ class ConfirmationSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'bio', 'email',
-                  'role']
+        fields = ('first_name', 'last_name', 'username', 'bio', 'email',
+                  'role')
         lookup_field = 'username'
 
 
 class UserPATCHSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'bio', 'email', ]
+        fields = ('first_name', 'last_name', 'username', 'bio', 'email')
         lookup_field = 'username'
 
 
