@@ -66,11 +66,15 @@ class ReviewSerializer(serializers.ModelSerializer):
         read_only=True,
         default=serializers.CurrentUserDefault()
     )
-
-    # score = serializers.IntegerField(min_value=1, max_value=10)
+    score = serializers.IntegerField(min_value=1, max_value=10)
 
     class Meta:
-        fields = '__all__'
+        fields = ('id',
+                  'author',
+                  'text',
+                  'score',
+                  'title',
+                  'pub_date')
         model = Review
         read_only_fields = ('title',)
 
@@ -84,6 +88,10 @@ class CommentSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = '__all__'
+        fields = ('id',
+                  'author',
+                  'review',
+                  'text',
+                  'pub_date')
         model = Comment
         read_only_fields = ('review',)
