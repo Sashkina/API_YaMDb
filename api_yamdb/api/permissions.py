@@ -8,11 +8,7 @@ class IsAdminUser(permissions.BasePermission):
     '''
 
     def has_permission(self, request, view):
-        if (
-                request.user.is_authenticated
-                and (request.user.is_admin)
-        ):
-            return True
+        return request.user.is_authenticated and request.user.is_admin
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -22,14 +18,9 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     '''
 
     def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return (request.method == 'POST'
-                or request.method == 'DELETE'
-                or request.method == 'PATCH'
-                ) and (
-                    request.user.is_authenticated
-                    and request.user.is_admin)
+        return (request.method in permissions.SAFE_METHODS
+                or request.user.is_authenticated
+                and request.user.is_admin)
 
 
 class IsAdminOrAuthorOrReadOnly(permissions.BasePermission):
@@ -46,10 +37,8 @@ class IsAdminOrAuthorOrReadOnly(permissions.BasePermission):
         )
 
     def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-
-        return request.user.is_authenticated and (
-            request.user.is_admin
-            or request.user.is_moderator
-            or request.user == obj.author)
+        return (request.method in permissions.SAFE_METHODS
+                or request.user.is_authenticated
+                and (request.user.is_admin
+                     or request.user.is_moderator
+                     or request.user == obj.author))

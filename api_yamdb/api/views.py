@@ -1,10 +1,8 @@
 import django_filters
-from django.db import IntegrityError
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from reviews.models import Category, Genre, Review, Title
 
@@ -96,10 +94,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         title = get_object_or_404(Title, id=self.kwargs.get('title_id'))
         author = self.request.user
-        try:
-            serializer.save(author=author, title=title)
-        except IntegrityError:
-            raise ValidationError('Отзыв на это произведение уже существует')
+        serializer.save(author=author, title=title)
 
 
 class CommentViewSet(viewsets.ModelViewSet):

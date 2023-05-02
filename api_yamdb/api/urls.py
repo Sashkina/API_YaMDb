@@ -25,6 +25,5 @@ router_v1.register(
 urlpatterns = [
     path('v1/auth/signup/', get_confirmation_code, name='signup'),
     path('v1/auth/token/', get_token, name='get_token'),
-    path('v1/auth/', include('django.contrib.auth.urls')),
     path('v1/', include(router_v1.urls)),
 ]
