@@ -1,5 +1,3 @@
-from api.permissions import IsAdminUser
-from api_yamdb.settings import DEFAULT_FROM_EMAIL
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
@@ -9,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import User
+from api.permissions import IsAdminUser
+from api_yamdb.settings import DEFAULT_FROM_EMAIL
 from .serializers import (ConfirmationCodeSerializer, ConfirmationSerializer,
                           UserPATCHSerializer, UserSerializer)
 
