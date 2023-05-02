@@ -13,7 +13,6 @@ FILES = [
     ('genre.csv', Genre),
     ('users.csv', User),
     ('titles.csv', Title),
-    # ('genre_title.csv', TitleGenreAssign),
     ('review.csv', Review),
     ('comments.csv', Comment),
 ]

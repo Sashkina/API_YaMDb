@@ -14,7 +14,6 @@ class Category(models.Model):
     class Meta:
         verbose_name = ('Категория')
         verbose_name_plural = ('Категории')
-        # ordering = ['id']
 
 
 class Genre(models.Model):
@@ -55,7 +54,6 @@ class Title(models.Model):
         ordering = ['name', 'description']
 
 
-
 class Review(models.Model):
     """Модель, описывающая отзыв на произведение."""
     author = models.ForeignKey(
@@ -72,6 +70,12 @@ class Review(models.Model):
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['author', 'title'],
+                name='unique_author_title'
+            )
+        ]
 
     def __str__(self):
         return self.text
