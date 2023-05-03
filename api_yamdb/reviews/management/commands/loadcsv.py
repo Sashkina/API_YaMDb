@@ -2,8 +2,7 @@ import csv
 
 from django.core.management.base import BaseCommand
 from django.shortcuts import get_object_or_404
-
-from reviews.models import Category, Genre, Title, Review, Comment # TitleGenreAssign
+from reviews.models import Category, Comment, Genre, Review, Title
 from users.models import User
 
 PATH_TO_UPLOAD = 'static/data/'
