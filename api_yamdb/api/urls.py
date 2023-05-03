@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from users.views import UserViewSet, get_confirmation_code, get_token
+from users.views import UserViewSet, get_token, signup
 
 from .views import (CategoryViewSet, CommentViewSet, GenreViewSet,
                     ReviewViewSet, TitleViewSet)
@@ -23,7 +23,7 @@ router_v1.register(
 )
 
 urlpatterns = [
-    path('v1/auth/signup/', get_confirmation_code, name='signup'),
+    path('v1/auth/signup/', signup, name='signup'),
     path('v1/auth/token/', get_token, name='get_token'),
     path('v1/', include(router_v1.urls)),
 ]

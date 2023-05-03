@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, viewsets
-
 from reviews.models import Category, Genre, Review, Title
 
 from .filters import TitleFilter
@@ -12,14 +11,12 @@ from .serializers import (CategorySerializer, CommentSerializer,
                           TitleReadSerializer, TitleWriteSerializer)
 
 
-
 class TitleViewSet(viewsets.ModelViewSet):
     """Эндпоинт для работы с моделью Title."""
     queryset = Title.objects.all()
     filter_backends = (DjangoFilterBackend,)
     filterset_class = TitleFilter
     permission_classes = (IsAdminOrReadOnly,)
-
 
     def get_serializer_class(self):
         """Определяет какой сериализатор будет использоваться
@@ -39,7 +36,6 @@ class CategoryViewSet(CRDViewSet, viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
 
 
-
 class GenreViewSet(CRDViewSet, viewsets.ModelViewSet):
     """Эндпоинт для работы с моделью Genre."""
     serializer_class = GenreSerializer
@@ -48,7 +44,6 @@ class GenreViewSet(CRDViewSet, viewsets.ModelViewSet):
     search_fields = ('name',)
     lookup_field = 'slug'
     permission_classes = (IsAdminOrReadOnly,)
-
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
