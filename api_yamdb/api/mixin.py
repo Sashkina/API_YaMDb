@@ -1,5 +1,4 @@
-from rest_framework import status, viewsets, mixins
-from rest_framework.response import Response
+from rest_framework import viewsets, mixins
 
 
 class CRDViewSet(mixins.DestroyModelMixin,
@@ -7,4 +6,3 @@ class CRDViewSet(mixins.DestroyModelMixin,
                  mixins.CreateModelMixin,
                  viewsets.GenericViewSet):
     pass
-
