@@ -27,7 +27,7 @@ class TitleViewSet(viewsets.ModelViewSet):
         return TitleWriteSerializer
 
 
-class CategoryViewSet(CRDViewSet, viewsets.ModelViewSet):
+class CategoryViewSet(CRDViewSet, viewsets.GenericViewSet):
     """Эндпоинт для работы с моделью Category."""
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
@@ -37,7 +37,7 @@ class CategoryViewSet(CRDViewSet, viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
 
 
-class GenreViewSet(CRDViewSet, viewsets.ModelViewSet):
+class GenreViewSet(CRDViewSet, viewsets.GenericViewSet):
     """Эндпоинт для работы с моделью Genre."""
     serializer_class = GenreSerializer
     queryset = Genre.objects.all()
