@@ -1,4 +1,4 @@
-api_yamdb
+API_YaMDb
 
 ### Описание:
 
@@ -9,6 +9,10 @@ api_yamdb
 из пользовательских оценок формируется усреднённая оценка произведения — рейтинг.
 Пользователи могут оставлять комментарии к отзывам.*
 
+### Технологии:
+<li> Python 3.9
+<li> Django 3.2
+<li> djangorestframework 3.12.4
 
 ### Как запустить проект:
 
@@ -58,10 +62,12 @@ python3 manage.py runserver
 
 1. **Получение списка всех отзывов**
 
-**Request sample:**
+***Request sample:***
 GET api/v1/titles/{title_id}/reviews/
 
-**Response sample:**
+***Response sample:***
+
+```json
 {
     "count": 0,
     "next": "string",
@@ -70,20 +76,31 @@ GET api/v1/titles/{title_id}/reviews/
         + {...}
     ]
 }
+```
 
 2. **Добавление комментария к отзыву**
 
-**Request sample:**
+***Request sample:***
 POST api/v1/titles/{title_id}/reviews/{review_id}/comments/
 
+```json
 {
     "text": "string"
 }
+```
 
-**Response sample:**
+***Response sample:***
+
+```json
 {
     "id": 0,
     "text": "string",
     "author": "string",
     "pub_date": "2019-08-24T14:15:22Z"
 }
+```
+
+### Авторы  
+<li> Дмитрий Дроздов
+<li> Евгений Маликов
+<li> Кристина Сашкина
